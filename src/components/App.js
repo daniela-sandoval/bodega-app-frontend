@@ -18,8 +18,17 @@ export default class App extends Component{
         }
       })
       .then(resp => resp.json())
-      .then(console.log)
+      .then(data => {
+        this.setState({
+          currentCart: data.carts[data.carts.length - 1].items
+        })
+      })
     }
+    fetch("http://localhost:3000/api/v1/items")
+    .then(resp => resp.json())
+    .then(items => {
+      this.setState({ items: items })
+    })
   }
 
   loginUser = (user) => {
@@ -39,28 +48,13 @@ export default class App extends Component{
     })
   }
 
-  signUpUser = (user) =>{
-    fetch("http://localhost:3000/api/v1/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(user)
-    })
-    .then(resp => resp.json())
-    .then(data => {
-      if(data.token) {
-        localStorage.token = data.token
-      }
-    })
-  }
 
   render() {
     return (
       <Switch>
-        <Route exact path='/' render={(...routerProps) => <Login {...routerProps} loginUser={this.loginUser}/>} />
-        <Route path='/register' render={(...routerProps) => <Register {...routerProps} signUpUser={this.signUpUser}/>} />
+        <Route path='/register' render={(...routerProps) => <Register {...routerProps}/>} />
+        <Route path='/home' >
+        <Route path='/' render={(...routerProps) => <Login {...routerProps} loginUser={this.loginUser}/>} />
       </Switch>
     )
   }

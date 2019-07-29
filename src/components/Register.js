@@ -12,7 +12,26 @@ export default class Register extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.signUpUser(this.state)
+    this.signUpUser(this.state)
+
+  }
+
+  signUpUser = (user) => {
+    fetch("http://localhost:3000/api/v1/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      if(data.token) {
+        localStorage.token = data.token
+      }
+    })
+    this.props.history.push("/home")
   }
 
   render() {
