@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import RequireAuth from './RequireAuth'
+import Auth from './Auth'
 
 class Home extends Component {
+
   render() {
+    console.log(this.props)
     return (
       <div>
       Welcome home!
@@ -11,4 +13,4 @@ class Home extends Component {
   }
 }
 
-export default RequireAuth(Home);
+export default Auth(Home, localStorage);
