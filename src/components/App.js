@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import Login from './Login';
 import Register from './Register'
 import Home from './Home'
-import Auth from './Auth'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import '../App.css';
 
 export default class App extends Component{
   state = {
     items: [],
-    currentCart: []
+    currentUserInfo: []
   }
 
   componentDidMount() {
@@ -22,7 +21,7 @@ export default class App extends Component{
       .then(resp => resp.json())
       .then(data => {
         this.setState({
-          currentCart: data.carts[data.carts.length - 1].items
+          currentUserInfo: data
         })
       })
     }
@@ -37,8 +36,8 @@ export default class App extends Component{
   render() {
     return (
       <Switch>
-        <Route path='/register' render={(...routerProps) => <Register {...routerProps}/>} />
-        <Route path='/home' component={Auth(Home, localStorage)}/>
+        <Route path='/register' component={Register} />
+        <Route path='/home' render={(routerProps) => <Home router={routerProps} currentCart={this.state.currentCart} items={this.state.items}/>}/>
         <Route path='/' component={Login} />
       </Switch>
     )
@@ -46,6 +45,4 @@ export default class App extends Component{
 
 }
 
-
-// <Route path='/home' render={(...routerProps) => <Home {...routerProps} currentCart={this.state.currentCart} items={this.state.items}/>}/>
-// <Login loginUser={this.loginUser}/>
+// <Route path='/home' component={Auth(Home, localStorage)}/>
