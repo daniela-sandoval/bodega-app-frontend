@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import RequireAuth from './RequireAuth'
+
+import Navbar from './Navbar';
+import Auth from './Auth'
 
 class Home extends Component {
   render() {
     return (
       <div>
-      Welcome home!
+      <Navbar />
+      
       </div>
     )
   }
 }
 
-export default RequireAuth(Home);
+export default Auth(Home, localStorage)
+// currentCart: data.carts[data.carts.length - 1].items,
