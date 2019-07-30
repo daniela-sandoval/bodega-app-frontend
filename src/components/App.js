@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login';
 import Register from './Register'
 import Home from './Home'
-import RequireAuth from './RequireAuth'
+import Auth from './Auth'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import '../App.css';
 
@@ -38,7 +38,7 @@ export default class App extends Component{
     return (
       <Switch>
         <Route path='/register' render={(...routerProps) => <Register {...routerProps}/>} />
-        <Route path='/home' render={(...routerProps) => <Home {...routerProps} currentCart={this.state.currentCart} items={this.state.items}/>}/>
+        <Route path='/home' component={Auth(Home, localStorage)}/>
         <Route path='/' component={Login} />
       </Switch>
     )
@@ -47,4 +47,5 @@ export default class App extends Component{
 }
 
 
+// <Route path='/home' render={(...routerProps) => <Home {...routerProps} currentCart={this.state.currentCart} items={this.state.items}/>}/>
 // <Login loginUser={this.loginUser}/>
