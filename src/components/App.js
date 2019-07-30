@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Login from './Login';
-import { Switch, Route } from 'react-router-dom'
 import Register from './Register'
+import Home from './Home'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import '../App.css';
 
 export default class App extends Component{
@@ -31,30 +32,13 @@ export default class App extends Component{
     })
   }
 
-  loginUser = (user) => {
-    fetch("http://localhost:3000/api/v1/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(user)
-    })
-    .then(resp => resp.json())
-    .then(data => {
-      if(data.token) {
-        localStorage.token = data.token
-      }
-    })
-  }
-
 
   render() {
     return (
       <Switch>
         <Route path='/register' render={(...routerProps) => <Register {...routerProps}/>} />
-        <Route path='/home' >
-        <Route path='/' render={(...routerProps) => <Login {...routerProps} loginUser={this.loginUser}/>} />
+        <Route path='/home' render={(...routerProps) => <Home {...routerProps} currentCart={this.state.currentCart} items={this.state.items}/>}/>
+        <Route path='/' component={Login} />
       </Switch>
     )
   }
