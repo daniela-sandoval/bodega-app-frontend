@@ -12,7 +12,29 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.loginUser(this.state)
+    this.loginUser(this.state)
+  }
+
+  loginUser = (user) => {
+    fetch("http://localhost:3000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      if(data.token) {
+        localStorage.token = data.token
+        this.props.history.push("/home")
+      }
+    })
+  }
+
+  handleClick = () => {
+    this.props.history.push("/register")
   }
 
   render() {
@@ -24,6 +46,7 @@ export default class Login extends Component {
           <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
           <input type="submit"/>
         </form>
+        <button onClick={this.handleClick}>New User?</button>
       </div>
     )
   }
