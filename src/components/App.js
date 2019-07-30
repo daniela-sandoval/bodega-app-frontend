@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login';
 import Register from './Register'
 import Home from './Home'
+import RequireAuth from './RequireAuth'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import '../App.css';
 
