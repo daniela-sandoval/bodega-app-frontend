@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
 import Auth from './Auth'
 
 class Home extends Component {
@@ -7,10 +8,12 @@ class Home extends Component {
     console.log(this.props)
     return (
       <div>
-      Welcome home!
+      <Navbar />
+
       </div>
     )
   }
 }
 
-export default Auth(Home, localStorage);
+export default Auth(Home, localStorage)
+// currentCart: data.carts[data.carts.length - 1].items,

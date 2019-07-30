@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login';
 import Register from './Register'
 import Home from './Home'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import '../App.css';
 
 export default class App extends Component{
@@ -21,7 +21,6 @@ export default class App extends Component{
       .then(resp => resp.json())
       .then(data => {
         this.setState({
-          // currentCart: data.carts[data.carts.length - 1].items
           currentUserInfo: data
         })
       })
@@ -45,3 +44,4 @@ export default class App extends Component{
   }
 
 }
+// <Route path='/home' component={Auth(Home, localStorage)}/>
