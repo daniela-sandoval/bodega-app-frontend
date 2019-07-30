@@ -29,7 +29,7 @@ export default class Register extends Component {
     .then(data => {
       if(data.token) {
         localStorage.token = data.token
-        this.props.history.push("/home")
+        this.props.history.push("/bodega")
       }
     })
   }
