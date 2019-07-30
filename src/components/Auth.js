@@ -7,7 +7,7 @@ const Auth = (WrappedComponent, user) => {
       if(user.token) {
         return <WrappedComponent {...this.props} />
       } else {
-        return <Redirect to='/login'/>
+        return <Redirect to='/'/>
       }
     }
   }

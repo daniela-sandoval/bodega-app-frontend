@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Login from './Login';
 import Register from './Register'
-import Home from './Home'
+import Bodega from './Bodega'
 import { Switch, Route } from 'react-router-dom'
 import '../App.css';
 
@@ -37,11 +37,11 @@ export default class App extends Component{
     return (
       <Switch>
         <Route path='/register' component={Register}/>}/>
-        <Route path='/home' render={(routerProps) => <Home router={routerProps} currentUserInfo={this.state.currentUserInfo} items={this.state.items}/>}/>
+        <Route path='/bodega' render={(routerProps) => <Bodega router={routerProps} currentUserInfo={this.state.currentUserInfo} items={this.state.items}/>}/>
         <Route path='/' component={Login} />
       </Switch>
     )
   }
 
 }
-// <Route path='/home' component={Auth(Home, localStorage)}/>
+// <Route path='/bodega' component={Auth(Bodega, localStorage)}/>

@@ -29,13 +29,12 @@ export default class Register extends Component {
     .then(data => {
       if(data.token) {
         localStorage.token = data.token
-        this.props.history.push("/home")
+        this.props.history.push("/bodega")
       }
     })
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <h1>REGISTER PLS</h1>
