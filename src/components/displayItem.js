@@ -4,7 +4,7 @@ import { Card, Button, Icon, Image } from 'semantic-ui-react';
 
 class DisplayItem extends Component {
   handleClick = () => {
-    this.props.makeCartItem(this.props.id)
+    this.props.deleteCartItem(this.props.id)
   }
 
   render() {
@@ -18,6 +18,12 @@ class DisplayItem extends Component {
             {this.props.description}
           </Card.Description>
           <br/>
+          <Button onClick={this.handleClick} animated='vertical'>
+            <Button.Content hidden>Delete</Button.Content>
+            <Button.Content visible>
+              <Icon name='window close outline' />
+            </Button.Content>
+          </Button>
         </Card.Content>
         <Card.Content extra>
           <span>

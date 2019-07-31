@@ -5,7 +5,7 @@ import '../Stylesheets/Item.scss';
 
 class Item extends Component {
   handleClick = () => {
-    this.props.makeCartItem(this.props.id)
+    this.props.makeCartItem(this.props)
   }
 
   render() {

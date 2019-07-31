@@ -5,7 +5,7 @@ import { Card } from 'semantic-ui-react'
 export default class Cart extends Component {
 
   state = {
-    currentMoney: this.props.userData.wallet,
+    currentMoney: null,
     canPay: ""
   }
 
@@ -18,21 +18,20 @@ export default class Cart extends Component {
   // }
 
   generateItems = () => {
-    let user = this.props.userData
-    return user.carts[user.carts.length - 1].items.map((item, i) => {
-    return <DisplayItem key={i} {...item} />
+    return this.props.cartItems.map((item, i) => {
+    return <DisplayItem deleteCartItem={this.props.deleteCartItem} key={i} {...item} />
     })
   }
 
   render () {
-    if(this.props.userData.id) {
+    if(this.props.cartItems[0]) {
       return (
         <div>
           <h1>Current items:</h1>
           <Card.Group>
             {this.generateItems()}
           </Card.Group>
-          <h4>Current Total: ${this.props.userData.carts[this.props.userData.carts.length - 1].total_price}0</h4>
+          <h4>Current Total: ${this.props.cartItems.total_price}0</h4>
           <br/>
           <button className="btns" >Pay Now?</button>
         </div>

@@ -8,9 +8,9 @@ import Auth from './Auth'
 
 class Bodega extends Component {
   state = {
-    items: [],
     categories: [],
-    currentUserInfo: []
+    currentUserInfo: [],
+    currentCart: []
   }
 
   componentDidMount() {
@@ -22,7 +22,8 @@ class Bodega extends Component {
     .then(resp => resp.json())
     .then(data => {
       this.setState({
-        currentUserInfo: data
+        currentUserInfo: data,
+        currentCart: data.carts[data.carts.length - 1].cart_items
       })
     })
     fetch("http://localhost:3000/api/v1/categories")
@@ -32,7 +33,7 @@ class Bodega extends Component {
     })
   }
 
-  makeCartItem = (itemId) => {
+  makeCartItem = (item) => {
     let currentCartId = this.state.currentUserInfo.carts[this.state.currentUserInfo.carts.length - 1].id
     fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
@@ -43,22 +44,21 @@ class Bodega extends Component {
       },
       body: JSON.stringify({
         cart_id: currentCartId,
-        item_id: itemId
+        item_id: item.id,
+        name: item.name,
+        price: item.price,
+        img_url: item.img_url
       })
     })
-    .then(
-      fetch("http://localhost:3000/api/v1/profile", {
-        headers: {
-          "Authorization": localStorage.token
-        }
-      })
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          currentUserInfo: data
-        })
-      })
-    )
+  }
+
+  deleteCartItem = (itemId) => {
+    let cart = this.state.currentCart
+    let newCartItems = cart.filter(item => !(item.id === itemId))
+    this.setState({ currentCart: newCartItems })
+    fetch(`http://localhost:3000/api/v1/cart_items/${itemId}`, {
+      method: "DELETE"
+    })
   }
 
   render() {
@@ -68,7 +68,7 @@ class Bodega extends Component {
       <Switch>
         <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
 
-        <Route path='/bodega/cart' render={(routerProps) => <Cart router={routerProps} userData={this.state.currentUserInfo} />}/>
+        <Route path='/bodega/cart' render={(routerProps) => <Cart deleteCartItem={this.deleteCartItem} router={routerProps} cartItems={this.state.currentCart} />}/>
 
         <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem}router={routerProps} items={this.state.items} categories={this.state.categories}/>} />
       </Switch>
