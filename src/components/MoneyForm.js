@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Auth from './Auth'
+import '../Stylesheets/MoneyForm.scss'
 
 class MoneyForm extends Component {
   state = {
@@ -20,12 +21,12 @@ class MoneyForm extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <span onClick={this.handleClick}>&times;</span>
+      <div className="modal">
+        <div className="modal-content">
+          <span className="close" onClick={this.handleClick}>&times;</span>
           <p>New Total: ${this.state.newAmount}</p>
           <form>
-            <label htmlFor="amount">Amount:</label>
+            <label htmlFor="amount">Amount: </label>
             <input id="amount" type="number" onChange={this.handleChange} value={this.state.amount}/>
           </form>
         </div>

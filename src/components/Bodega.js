@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Profile from './Profile'
 import Cart from './Cart'
+import Store from './Store'
 import { Switch, Route } from 'react-router-dom'
 import Auth from './Auth'
 import "../Stylesheets/Bodega.scss";
@@ -9,6 +10,7 @@ import "../Stylesheets/Bodega.scss";
 class Bodega extends Component {
   state = {
     items: [],
+    categories: [],
     currentUserInfo: []
   }
 
@@ -25,10 +27,10 @@ class Bodega extends Component {
       })
     })
 
-    fetch("http://localhost:3000/api/v1/items")
+    fetch("http://localhost:3000/api/v1/categories")
     .then(resp => resp.json())
-    .then(items => {
-      this.setState({ items: items })
+    .then(categories => {
+      this.setState({ categories: categories })
     })
   }
 
@@ -40,6 +42,7 @@ class Bodega extends Component {
         <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
 
         <Route path='/bodega/cart' component={Cart}/>
+        <Route path='/bodega' render={(routerProps) => <Store router={routerProps} items={this.state.items} categories={this.state.categories}/>} />
       </Switch>
       </div>
     )

@@ -42,10 +42,10 @@ export default class Register extends Component {
         <h4>REGISTER PLS</h4>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username: </label>
-          <input id="username" type="text" name="username" onChange={this.handleChange} value={this.state.username} /><br/>
+          <input className="user-input" id="username" type="text" name="username" onChange={this.handleChange} value={this.state.username} /><br/>
 
           <label htmlFor="pass">Password: </label>
-          <input id="pass" type="password" name="password" onChange={this.handleChange} value={this.state.password} /><br/>
+          <input className="user-input" id="pass" type="password" name="password" onChange={this.handleChange} value={this.state.password} /><br/>
           <input className="btns" type="submit" />
         </form>
       </div>

@@ -45,10 +45,10 @@ export default class Login extends Component {
         <h4>LOGIN</h4>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username: </label>
-          <input className="user-input"id="username" type="text" name="username" onChange={this.handleChange} value={this.state.username} /><br/>
+          <input className="user-input" id="username" type="text" name="username" onChange={this.handleChange} value={this.state.username} /><br/>
 
           <label htmlFor="pass">Password: </label>
-          <input id="pass" type="password" name="password" onChange={this.handleChange} value={this.state.password} /><br/>
+          <input className="user-input" id="pass" type="password" name="password" onChange={this.handleChange} value={this.state.password} /><br/>
           <input className="btns" type="submit"/>
         </form>
         <button className="btns" onClick={this.handleClick}>New User?</button>

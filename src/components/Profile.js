@@ -21,7 +21,7 @@ export default class Profile extends Component {
           <p>Current Cart Total: ${this.props.userData.carts[this.props.userData.carts.length - 1].total_price}</p>
           <p>Wallet: ${this.props.userData.wallet}</p>
           <button onClick={this.toggleForm}>ADD MONEY</button>
-          {this.state.moneyForm ? <MoneyForm currentMoney={this.props.userData.wallet}toggleForm={this.toggleForm}/> : null}
+          {this.state.moneyForm ? <MoneyForm currentMoney={this.props.userData.wallet} toggleForm={this.toggleForm}/> : null}
         </div>
       )
     } else {
