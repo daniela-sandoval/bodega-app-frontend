@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card } from 'semantic-ui-react'
 import Item from './Item'
 
 class ItemList extends Component {
@@ -6,7 +7,7 @@ class ItemList extends Component {
 
   generateItems = () => {
     return this.props.category.items.map((item, i) => {
-    return <Item key={i} {...item} />
+    return <Item makeCartItem={this.props.makeCartItem} key={i} {...item} />
     })
   }
 
@@ -16,9 +17,9 @@ class ItemList extends Component {
     //   if (this.props.category.items.length !== 0) {
   console.log(this.props.category.items)
   return (
-    <div className="item-list">
-    {this.generateItems()}
-    </div>
+    <Card.Group itemsPerRow={1}>
+      {this.generateItems()}
+    </Card.Group>
     )
   }
 

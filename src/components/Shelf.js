@@ -24,24 +24,20 @@ class Shelf extends Component {
 
   showItemList = () => {
     if (this.state.category !== "") {
-      return <ItemList category={this.state.category} />
+      return <ItemList makeCartItem={this.props.makeCartItem} category={this.state.category} />
     }
   }
 
   render() {
     if (this.props.categories.length !== 0) {
       return (
-        <div>
-          <div className="Filter">
-            <label>
-            {this.props.position} Shelf Category:
-            <Select options={this.generateOptions()} onChange={this.handleChange}/>
-            </label>
-            <h3>{this.state.category.name}</h3>
-            {this.showItemList()}
-          </div>
-          <div className="container-one">
-          </div>
+        <div className="Filter">
+          <label>
+          {this.props.position} Shelf Category:
+          <Select options={this.generateOptions()} onChange={this.handleChange}/>
+          </label>
+          <h3>{this.state.category.name}</h3>
+          {this.showItemList()}
         </div>
         )
     } else {

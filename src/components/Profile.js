@@ -14,7 +14,6 @@ export default class Profile extends Component {
 
   render () {
     if(this.props.userData.id) {
-        console.log(this.props)
       return (
         <div>
           <h1>Name: {this.props.userData.username}</h1>
