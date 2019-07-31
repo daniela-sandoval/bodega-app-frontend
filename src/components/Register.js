@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "../Stylesheets/register.scss";
 
 export default class Register extends Component {
   state = {
@@ -36,12 +37,16 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div>
-        <h1>REGISTER PLS</h1>
+      <div className="register">
+        <h1>LA BODEGA</h1>
+        <h4>REGISTER PLS</h4>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
-          <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
-          <input type="submit" />
+          <label htmlFor="username">Username: </label>
+          <input className="user-input" id="username" type="text" name="username" onChange={this.handleChange} value={this.state.username} /><br/>
+
+          <label htmlFor="pass">Password: </label>
+          <input className="user-input" id="pass" type="password" name="password" onChange={this.handleChange} value={this.state.password} /><br/>
+          <input className="btns" type="submit" />
         </form>
       </div>
     )

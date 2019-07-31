@@ -1,0 +1,26 @@
+.modal {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  .modal-content {
+    background-color: white;
+    position: absolute;
+    border: 1px solid black;
+    padding: 20px;
+    width: 40%;
+  }
+  .close {
+    color: black;
+    float: right;
+    &:hover {
+      color: cyan;
+      cursor: pointer;
+    }
+  }
+}

@@ -47,6 +47,7 @@ class Bodega extends Component {
         <Route path='/bodega' render={(routerProps) => <Store router={routerProps} items={this.state.items} categories={this.state.categories}/>} />
         <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
         <Route path='/bodega/cart' component={Cart}/>
+        <Route path='/bodega' render={(routerProps) => <Store router={routerProps} items={this.state.items} categories={this.state.categories}/>} />
       </Switch>
       </div>
     )

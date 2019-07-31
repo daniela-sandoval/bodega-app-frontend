@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "../Stylesheets/login.scss";
 
 export default class Login extends Component {
   state = {
@@ -39,14 +40,18 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h1>LOGIN PLS</h1>
+      <div className="login">
+        <h1>LA BODEGA</h1>
+        <h4>LOGIN</h4>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
-          <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
-          <input type="submit"/>
+          <label htmlFor="username">Username: </label>
+          <input className="user-input" id="username" type="text" name="username" onChange={this.handleChange} value={this.state.username} /><br/>
+
+          <label htmlFor="pass">Password: </label>
+          <input className="user-input" id="pass" type="password" name="password" onChange={this.handleChange} value={this.state.password} /><br/>
+          <input className="btns" type="submit"/>
         </form>
-        <button onClick={this.handleClick}>New User?</button>
+        <button className="btns" onClick={this.handleClick}>New User?</button>
       </div>
     )
   }

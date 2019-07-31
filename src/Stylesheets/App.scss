@@ -1,0 +1,8 @@
+.btns {
+  background-color: #27a527;
+  border-radius: 6px;
+  transition: 0.4s;
+  &:hover {
+    background-color: red;
+  }
+}

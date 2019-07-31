@@ -3,7 +3,7 @@ import Login from './Login';
 import Register from './Register'
 import Bodega from './Bodega'
 import { Switch, Route } from 'react-router-dom'
-import '../App.css';
+import '../Stylesheets/App.scss';
 
 export default class App extends Component{
 
