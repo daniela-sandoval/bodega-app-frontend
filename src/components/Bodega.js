@@ -8,8 +8,9 @@ import Auth from './Auth'
 
 class Bodega extends Component {
   state = {
-    items: [],
+    // items: [],
     categories: [],
+    currentCart: [],
     currentUserInfo: []
   }
 
@@ -20,7 +21,7 @@ class Bodega extends Component {
       }
     })
     .then(resp => resp.json())
-    .then(data => {
+    .then(data => {console.log(data)
       this.setState({
         currentUserInfo: data
       })
@@ -46,22 +47,36 @@ class Bodega extends Component {
         item_id: itemId
       })
     })
-    .then(
-      fetch("http://localhost:3000/api/v1/profile", {
-        headers: {
-          "Authorization": localStorage.token
-        }
-      })
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          currentUserInfo: data
-        })
-      })
-    )
+    // .then(
+    //   fetch("http://localhost:3000/api/v1/profile", {
+    //     headers: {
+    //       "Authorization": localStorage.token
+    //     }
+    //   })
+    //   .then(resp => resp.json())
+    //   .then(data => {
+    //     this.setState({
+    //       currentUserInfo: data
+    //     })
+    //   })
+    // )
+    // .then(res => res.json())
+    // .then(data => {
+    //   const currentCart = this.getCurrentCart(currentCartId)
+    //   const currentCartItems = currentCart.items
+    //   const updatedCartItems = [...currentCartItems, data.item]
+    //
+    //   const updatedUser = {
+    //     ...this.state.currentUserInfo,
+    //   }
+  }
+
+  getCurrentCart = (id) => {
+    return this.state.currentUserInfo.carts.find(cart => cart.id === id)
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
       <Navbar />
