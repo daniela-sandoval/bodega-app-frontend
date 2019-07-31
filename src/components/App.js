@@ -18,5 +18,4 @@ export default class App extends Component{
   }
 
 }
-
-// <Route path='/home' component={Auth(Home, localStorage)}/>
+// <Route path='/bodega' component={Auth(Bodega, localStorage)}/>

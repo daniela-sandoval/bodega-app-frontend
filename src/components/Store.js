@@ -8,7 +8,7 @@ class Store extends Component {
   render() {
     const leftCategories = this.props.categories.filter(category => category.shelf.name === "Left")
     const rightCategories = this.props.categories.filter(category => category.shelf.name === "Right")
-
+    
     return (
       <div className="store-wrapper">
       <h1>La Bodega</h1>
