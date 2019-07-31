@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import ItemList from './ItemList'
 
 class Shelf extends Component {
 
@@ -17,8 +18,14 @@ class Shelf extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e)
-    this.setState({category: e.label})
+    let selectedCategory =  this.props.categories.find(category => category.id === e.value)
+    this.setState({category: selectedCategory})
+  }
+
+  showItemList = () => {
+    if (this.state.category !== "") {
+      return <ItemList category={this.state.category} />
+    }
   }
 
   render() {
@@ -30,7 +37,8 @@ class Shelf extends Component {
             {this.props.position} Shelf Category:
             <Select options={this.generateOptions()} onChange={this.handleChange}/>
             </label>
-            <h3>{this.state.category}</h3>
+            <h3>{this.state.category.name}</h3>
+            {this.showItemList()}
           </div>
           <div className="container-one">
           </div>
