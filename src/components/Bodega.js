@@ -8,9 +8,9 @@ import Auth from './Auth'
 
 class Bodega extends Component {
   state = {
-    items: [],
     categories: [],
-    currentUserInfo: []
+    currentUserInfo: [],
+    currentCart: []
   }
 
   componentDidMount() {
@@ -20,9 +20,10 @@ class Bodega extends Component {
       }
     })
     .then(resp => resp.json())
-    .then(data => {
+    .then(data => { console.log(data.carts)
       this.setState({
-        currentUserInfo: data
+        currentUserInfo: data,
+        currentCart: data.carts[data.carts.length - 1]
       })
     })
     fetch("http://localhost:3000/api/v1/categories")
@@ -62,6 +63,7 @@ class Bodega extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
       <Navbar />
