@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Auth from './Auth'
-import LeftShelf from './LeftShelf'
+import Shelf from './Shelf'
 
 class Store extends Component {
 
   render() {
-    // console.log(this.props)
+    const leftCategories = this.props.categories.filter(category => category.shelf.name === "Left")
+    const rightCategories = this.props.categories.filter(category => category.shelf.name === "Right")
     return (
       <div className="store-wrapper">
       <h1>La Bodega</h1>
-      <LeftShelf items={this.props} />
+      <Shelf position="Left" categories={leftCategories}/>
+      <Shelf position="Right" categories={rightCategories}/>
       </div>
     );
   }

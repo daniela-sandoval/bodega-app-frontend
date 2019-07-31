@@ -9,6 +9,7 @@ import Auth from './Auth'
 class Bodega extends Component {
   state = {
     items: [],
+    categories: [],
     currentUserInfo: []
   }
 
@@ -25,10 +26,16 @@ class Bodega extends Component {
       })
     })
 
-    fetch("http://localhost:3000/api/v1/items")
+    // fetch("http://localhost:3000/api/v1/items")
+    // .then(resp => resp.json())
+    // .then(items => {
+    //   this.setState({ items: items })
+    // })
+
+    fetch("http://localhost:3000/api/v1/categories")
     .then(resp => resp.json())
-    .then(items => {
-      this.setState({ items: items })
+    .then(categories => {
+      this.setState({ categories: categories })
     })
   }
 
@@ -37,7 +44,7 @@ class Bodega extends Component {
       <div>
       <Navbar />
       <Switch>
-        <Route path='/bodega' render={(routerProps) => <Store router={routerProps} items={this.state.items} />} />
+        <Route path='/bodega' render={(routerProps) => <Store router={routerProps} items={this.state.items} categories={this.state.categories}/>} />
         <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
         <Route path='/bodega/cart' component={Cart}/>
       </Switch>
