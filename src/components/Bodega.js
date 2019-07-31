@@ -4,6 +4,7 @@ import Profile from './Profile'
 import Cart from './Cart'
 import { Switch, Route } from 'react-router-dom'
 import Auth from './Auth'
+import "../Stylesheets/Bodega.scss";
 
 class Bodega extends Component {
   state = {

@@ -1,0 +1,16 @@
+.nav {
+  font-family: "Staatliches";
+  font-size: 30px;
+  background: red;
+  padding: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    transition: 0.4s;
+    &:hover {
+      color: black;
+    }
+  }
+}
