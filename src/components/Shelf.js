@@ -25,11 +25,15 @@ class Shelf extends Component {
     if (this.props.categories.length !== 0) {
       return (
         <div>
-        <label>
-        {this.props.position} Shelf Category:
-        <Select options={this.generateOptions()} onChange={this.handleChange}/>
-        </label>
-        <h3>{this.state.category}</h3>
+          <div className="Filter">
+            <label>
+            {this.props.position} Shelf Category:
+            <Select options={this.generateOptions()} onChange={this.handleChange}/>
+            </label>
+            <h3>{this.state.category}</h3>
+          </div>
+          <div className="container-one">
+          </div>
         </div>
         )
     } else {

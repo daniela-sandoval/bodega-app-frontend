@@ -1,0 +1,15 @@
+.store-wrapper {
+  display: flex;
+  .left {
+    .container {
+      background: grey;
+      width: 100%;
+      height: 90px;
+    }
+  }
+  .container-two {
+    background: grey;
+    width: 100%;
+    height: 90px;
+  }
+}
