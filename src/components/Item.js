@@ -13,13 +13,13 @@ class Item extends Component {
     return (
       <Card className="item-card">
         <Image className="food-pic" src={this.props.img_url} alt="food item" wrapped ui={false} />
-        <Card.Content className="description-con">
-          <Card.Header>{this.props.name}</Card.Header>
+        <Card.Content>
+          <Card.Header className="description-con">{this.props.name}</Card.Header>
           <Card.Description>
             {this.props.description}
             <br/>
             <Button onClick={this.handleClick} animated='vertical'>
-              <Button.Content hidden>Shop</Button.Content>
+              <Button.Content hidden className="add-btn">Shop</Button.Content>
               <Button.Content visible>
                 <Icon name='shop' />
               </Button.Content>

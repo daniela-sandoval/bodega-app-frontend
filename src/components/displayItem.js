@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react';
+import '../Stylesheets/DisplayItem.scss'
 
 
 class DisplayItem extends Component {
@@ -10,20 +11,20 @@ class DisplayItem extends Component {
   render() {
     console.log(this.props)
     return (
-      <Card>
-        <Image src={this.props.img_url} alt="food item" wrapped ui={false} />
+      <Card className="dis-item">
+        <Image src={this.props.img_url} alt="food item" wrapped ui={false} className="food-pic"/>
         <Card.Content>
           <Card.Header>{this.props.name}</Card.Header>
           <Card.Description>
             {this.props.description}
+            <br/>
+            <Button onClick={this.handleClick} animated='vertical'>
+              <Button.Content hidden className="delete-btn">Delete</Button.Content>
+              <Button.Content visible>
+                <Icon name='trash alternate' />
+              </Button.Content>
+            </Button>
           </Card.Description>
-          <br/>
-          <Button onClick={this.handleClick} animated='vertical'>
-            <Button.Content hidden>Delete</Button.Content>
-            <Button.Content visible>
-              <Icon name='window close outline' />
-            </Button.Content>
-          </Button>
         </Card.Content>
         <Card.Content extra>
           <span>
