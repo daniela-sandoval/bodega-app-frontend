@@ -2,8 +2,17 @@
   max-width: 70%;
   .shelf-name {
     font-size: 25px;
+    color: red;
+    text-shadow: 2px 2px #16d6f7;
   }
   .select-bar {
     width: 500px;
   }
+}
+
+.shelf-label {
+  font-family: "Staatliches";
+  font-size: 30px;
+  color: red;
+  text-shadow: 2px 2px #16d6f7;
 }

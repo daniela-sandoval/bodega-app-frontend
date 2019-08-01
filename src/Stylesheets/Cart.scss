@@ -1,8 +1,15 @@
 .cart {
   h1 {
     font-family: "Staatliches";
+    margin-left: 30px;
+    margin-top: 15px;
+    font-size: 40px;
   }
   .display-con {
     justify-content: center;
+  }
+  .btns {
+    zoom: 2;
+    margin: 10px;
   }
 }
