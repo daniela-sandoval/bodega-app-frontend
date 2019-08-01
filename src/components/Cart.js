@@ -5,18 +5,30 @@ import '../Stylesheets/Cart.scss'
 
 export default class Cart extends Component {
 
-  state = {
-    currentMoney: null,
-    canPay: ""
+  // state = {
+    // currentMoney: null,
+  //   canPay: false
+  // }
+
+  checkMoney = () => {
+    if(this.props.wallet >= this.props.currentTotal) {
+      return (
+        <div>
+        <br/>
+        <button className="btns" onClick={this.handleClick}>Pay Now?</button>
+        </div>
+        )} else {
+      return (
+        <div>
+          <p>You don't have enough money in your wallet! Add money in your Profile</p>
+        </div>
+        )}
   }
 
-  // checkMoney = () => {
-  //   if(this.props.userData.wallet > this.props.userData.carts[this.props.userData.carts.length - 1].total_price) {
-  //     this.setState({ canPay: true })
-  //   } else {
-  //     this.setState({ canPay: false })
-  //   }
-  // }
+  handleClick = (e) => {
+    // console.log(e)
+    this.props.payCart(this.props)
+  }
 
   generateItems = () => {
     return this.props.cartItems.map((item, i) => {
@@ -32,9 +44,8 @@ export default class Cart extends Component {
           <Card.Group className="display-con">
             {this.generateItems()}
           </Card.Group>
-          <h1>Current Total: ${this.props.cartItems.total_price}</h1>
-          <br/>
-          <button className="btns" >Pay Now?</button>
+          <h1>Current Total: ${this.props.currentTotal}</h1>
+          {this.checkMoney()}
         </div>
       )
     } else {
