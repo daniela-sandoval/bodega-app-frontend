@@ -8,10 +8,9 @@ import Auth from './Auth'
 
 class Bodega extends Component {
   state = {
-    // items: [],
     categories: [],
-    currentCart: [],
-    currentUserInfo: []
+    currentUserInfo: [],
+    currentCart: []
   }
 
   componentDidMount() {
@@ -21,7 +20,7 @@ class Bodega extends Component {
       }
     })
     .then(resp => resp.json())
-    .then(data => {console.log(data)
+    .then(data => { console.log(data.carts)
       this.setState({
         currentUserInfo: data,
         currentCart: data.carts[data.carts.length - 1]
