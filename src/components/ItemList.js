@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'semantic-ui-react'
 import Item from './Item'
+import '../Stylesheets/ItemList.scss'
 
 class ItemList extends Component {
 
@@ -14,7 +15,7 @@ class ItemList extends Component {
 
   render() {
   return (
-    <Card.Group itemsPerRow={1}>
+    <Card.Group itemsPerRow={2} className="item-holder">
       {this.generateItems()}
     </Card.Group>
     )

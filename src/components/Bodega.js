@@ -24,7 +24,7 @@ class Bodega extends Component {
       // debugger
       this.setState({
         currentUserInfo: data,
-        currentCart: data.carts[data.carts.length - 1]
+        currentCart: data.carts[data.carts.length - 1].cart_items
       })
     })
     fetch("http://localhost:3000/api/v1/categories")
@@ -60,7 +60,15 @@ class Bodega extends Component {
         currentCart: updatedCurrentCart
         })
       })
+  }
 
+  deleteCartItem = (itemId) => {
+    let cart = this.state.currentCart
+    let newCartItems = cart.filter(item => !(item.id === itemId))
+    this.setState({ currentCart: newCartItems })
+    fetch(`http://localhost:3000/api/v1/cart_items/${itemId}`, {
+      method: "DELETE"
+    })
   }
   //
   // getCurrentCart = (id) => {
@@ -75,7 +83,11 @@ class Bodega extends Component {
       <Switch>
         <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
 
+<<<<<<< HEAD
         <Route path='/bodega/cart' render={(routerProps) => <Cart router={routerProps} cartItems={this.state.currentCart} />}/>
+=======
+        <Route path='/bodega/cart' render={(routerProps) => <Cart deleteCartItem={this.deleteCartItem} router={routerProps} cartItems={this.state.currentCart} />}/>
+>>>>>>> origin/danielUH
 
         <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem} router={routerProps} currentCart={this.state.currentCart} categories={this.state.categories}/>} />
       </Switch>

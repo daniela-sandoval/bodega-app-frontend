@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import DisplayItem from './displayItem'
 import { Card } from 'semantic-ui-react'
+import '../Stylesheets/Cart.scss'
 
 export default class Cart extends Component {
 
   state = {
-    // currentMoney: this.props.userData.wallet,
-    // canPay: ""
+    currentMoney: null,
+    canPay: ""
   }
 
   // checkMoney = () => {
@@ -19,19 +20,19 @@ export default class Cart extends Component {
 
   generateItems = () => {
     return this.props.cartItems.map((item, i) => {
-    return <DisplayItem key={i} {...item} />
+    return <DisplayItem deleteCartItem={this.props.deleteCartItem} key={i} {...item} />
     })
   }
 
   render () {
     if(this.props.cartItems[0]) {
       return (
-        <div>
+        <div className="cart">
           <h1>Current items:</h1>
-          <Card.Group>
+          <Card.Group className="display-con">
             {this.generateItems()}
           </Card.Group>
-          <h4>Current Total: ${this.props.userData.carts[this.props.userData.carts.length - 1].total_price}0</h4>
+          <h1>Current Total: ${this.props.cartItems.total_price}</h1>
           <br/>
           <button className="btns" >Pay Now?</button>
         </div>

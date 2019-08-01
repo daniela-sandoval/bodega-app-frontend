@@ -1,4 +1,5 @@
 .btns {
+  font-family: 'Staatliches', cursive;
   background-color: #27a527;
   border-radius: 6px;
   transition: 0.4s;
@@ -6,4 +7,9 @@
     background-color: red;
     cursor: pointer;
   }
+}
+
+#root {
+  background-color: #FFDB58;
+  height: 100%;
 }
