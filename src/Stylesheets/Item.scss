@@ -1,7 +1,13 @@
 .item-card {
-  font-family: "Staatliches";
-  zoom: 0.2;
+  font-family: 'Staatliches', cursive;
+  zoom: 0.3;
   .food-pic {
-    width: auto;
+    img {
+      background-image: linear-gradient(#0a70da, #159db3, #10b197);
+      object-fit: contain;
+    }
+  }
+  .add-btn {
+    color: green;
   }
 }

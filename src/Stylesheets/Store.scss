@@ -1,15 +1,6 @@
 .store-wrapper {
+  font-family: 'Staatliches', cursive;
   display: flex;
-  .left {
-    .container {
-      width: 100%;
-      background: grey;
-      height: 90px;
-    }
-  }
-  .container-two {
-    width: 100%;
-    background: grey;
-    height: 90px;
-  }
+  justify-content: center;
+  margin: 30px;
 }

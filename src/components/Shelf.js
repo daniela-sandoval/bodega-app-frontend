@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import ItemList from './ItemList'
+import '../Stylesheets/Shelf.scss'
 
 class Shelf extends Component {
 
@@ -32,9 +33,9 @@ class Shelf extends Component {
     if (this.props.categories.length !== 0) {
       return (
         <div className="Filter">
-          <label>
+          <label className="shelf-name">
           {this.props.position} Shelf Category:
-          <Select options={this.generateOptions()} onChange={this.handleChange}/>
+          <Select options={this.generateOptions()} onChange={this.handleChange} className="select-bar"/>
           </label>
           <h3>{this.state.category.name}</h3>
           {this.showItemList()}

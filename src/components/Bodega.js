@@ -8,9 +8,9 @@ import Auth from './Auth'
 
 class Bodega extends Component {
   state = {
-    items: [],
     categories: [],
-    currentUserInfo: []
+    currentUserInfo: [],
+    currentCart: []
   }
 
   componentDidMount() {
@@ -21,8 +21,10 @@ class Bodega extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
+      // debugger
       this.setState({
-        currentUserInfo: data
+        currentUserInfo: data,
+        currentCart: data.carts[data.carts.length - 1].cart_items
       })
     })
     fetch("http://localhost:3000/api/v1/categories")
@@ -32,7 +34,7 @@ class Bodega extends Component {
     })
   }
 
-  makeCartItem = (itemId) => {
+  makeCartItem = (item) => {
     let currentCartId = this.state.currentUserInfo.carts[this.state.currentUserInfo.carts.length - 1].id
     fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
@@ -43,38 +45,63 @@ class Bodega extends Component {
       },
       body: JSON.stringify({
         cart_id: currentCartId,
-        item_id: itemId
+        item_id: item.id,
+        name: item.name,
+        price: item.price,
+        img_url: item.img_url
       })
     })
-    .then(
-      fetch("http://localhost:3000/api/v1/profile", {
-        headers: {
-          "Authorization": localStorage.token
-        }
-      })
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          currentUserInfo: data
+    .then(res => res.json())
+    .then(data => {
+      const newItem = {id: data.id, name: data.item.name, img_url: data.item.img_url,  price: data.item.price, cart_id: data.cart.id, item_id: data.item.id}
+      const updatedCurrentCart = this.state.currentCart
+      updatedCurrentCart.cart_items.push(newItem)
+      this.setState({
+        currentCart: updatedCurrentCart
         })
       })
-    )
   }
 
+  deleteCartItem = (itemId) => {
+    let cart = this.state.currentCart
+    let newCartItems = cart.filter(item => !(item.id === itemId))
+    this.setState({ currentCart: newCartItems })
+    fetch(`http://localhost:3000/api/v1/cart_items/${itemId}`, {
+      method: "DELETE"
+    })
+  }
+  //
+  // getCurrentCart = (id) => {
+  //   return this.state.currentUserInfo.carts.find(cart => cart.id === id)
+  // }
+
   render() {
+    console.log(this.state)
     return (
       <div>
       <Navbar />
       <Switch>
         <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
 
-        <Route path='/bodega/cart' render={(routerProps) => <Cart router={routerProps} userData={this.state.currentUserInfo} />}/>
+<<<<<<< HEAD
+        <Route path='/bodega/cart' render={(routerProps) => <Cart router={routerProps} cartItems={this.state.currentCart} />}/>
+=======
+        <Route path='/bodega/cart' render={(routerProps) => <Cart deleteCartItem={this.deleteCartItem} router={routerProps} cartItems={this.state.currentCart} />}/>
+>>>>>>> origin/danielUH
 
-        <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem}router={routerProps} items={this.state.items} categories={this.state.categories}/>} />
+        <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem} router={routerProps} currentCart={this.state.currentCart} categories={this.state.categories}/>} />
       </Switch>
       </div>
     )
   }
 }
+
+// const currentCart = this.getCurrentCart(currentCartId)
+// const currentCartItems = currentCart.items
+// const updatedCartItems = [...currentCartItems, data.item]
+//
+// const updatedUser = {
+//   ...this.state.currentUserInfo
+// }
 
 export default Auth(Bodega, localStorage)
