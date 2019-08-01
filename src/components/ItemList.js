@@ -13,14 +13,13 @@ class ItemList extends Component {
 
 
   render() {
-  console.log(this.props.category.items)
   return (
     <Card.Group itemsPerRow={1}>
       {this.generateItems()}
     </Card.Group>
     )
   }
-  
+
 }
 
 export default ItemList;

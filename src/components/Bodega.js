@@ -20,7 +20,8 @@ class Bodega extends Component {
       }
     })
     .then(resp => resp.json())
-    .then(data => { console.log(data.carts)
+    .then(data => {
+      // debugger
       this.setState({
         currentUserInfo: data,
         currentCart: data.carts[data.carts.length - 1]
@@ -33,7 +34,7 @@ class Bodega extends Component {
     })
   }
 
-  makeCartItem = (itemId) => {
+  makeCartItem = (item) => {
     let currentCartId = this.state.currentUserInfo.carts[this.state.currentUserInfo.carts.length - 1].id
     fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
@@ -44,28 +45,27 @@ class Bodega extends Component {
       },
       body: JSON.stringify({
         cart_id: currentCartId,
-        item_id: itemId
+        item_id: item.id,
+        name: item.name,
+        price: item.price,
+        img_url: item.img_url
       })
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      console.log(this.state.currentCart)
-      const newItem = {id: data.id, cart_id: data.cart.id, item_id: data.item.id}
-      console.log(newItem)
+      const newItem = {id: data.id, name: data.item.name, img_url: data.item.img_url,  price: data.item.price, cart_id: data.cart.id, item_id: data.item.id}
       const updatedCurrentCart = this.state.currentCart
       updatedCurrentCart.cart_items.push(newItem)
       this.setState({
         currentCart: updatedCurrentCart
         })
-      // debugger
       })
 
   }
-
-  getCurrentCart = (id) => {
-    return this.state.currentUserInfo.carts.find(cart => cart.id === id)
-  }
+  //
+  // getCurrentCart = (id) => {
+  //   return this.state.currentUserInfo.carts.find(cart => cart.id === id)
+  // }
 
   render() {
     console.log(this.state)

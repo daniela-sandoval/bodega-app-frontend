@@ -5,11 +5,10 @@ import '../Stylesheets/Item.scss';
 
 class Item extends Component {
   handleClick = () => {
-    this.props.makeCartItem(this.props.id)
+    this.props.makeCartItem(this.props)
   }
 
   render() {
-    console.log(this.props)
     return (
       <Card className="item-card">
         <Image className="food-pic" src={this.props.img_url} alt="food item" wrapped ui={false} />
