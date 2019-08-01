@@ -80,11 +80,26 @@ class Bodega extends Component {
 
   payCart = (cart) => {
     // console.log(cart)
-    this.setState({
-      currentCart: [],
-      wallet: this.state.wallet - cart.currentTotal,
-      currentTotal: 0
+    debugger
+    fetch(`http://localhost:3000/api/v1/carts`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": localStorage.token
+      },
+      body: JSON.stringify({
+        user_id: this.state.currentUserInfo.id
       })
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          currentCart: [],
+          wallet: this.state.wallet - cart.currentTotal,
+          currentTotal: 0
+          })
+        })
   }
 
   render() {
