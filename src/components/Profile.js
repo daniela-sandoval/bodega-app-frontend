@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MoneyForm from './MoneyForm'
+import '../Stylesheets/Profile.scss'
 
 export default class Profile extends Component {
   state = {

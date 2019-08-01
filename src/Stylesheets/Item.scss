@@ -1,6 +1,8 @@
 .item-card {
-  font-family: "Staatliches";
-  zoom: 0.2;
+  zoom: 0.3;
   .food-pic {
+    img {
+      object-fit: contain;
+    }
   }
 }

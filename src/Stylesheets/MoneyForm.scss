@@ -8,19 +8,26 @@
   justify-content: center;
   align-items: center;
   top: 0px;
-  .modal-content {
-    background-color: white;
-    position: absolute;
-    border: 1px solid black;
-    padding: 20px;
-    width: 40%;
-  }
-  .close {
-    color: black;
-    float: right;
-    &:hover {
-      color: cyan;
-      cursor: pointer;
+  .modal-pic {
+    background-image: url(https://media2.giphy.com/media/ozf26DV8FqaCpkYt6n/giphy.gif);
+    background-repeat: no-repeat;
+    // border: 1px solid black;
+    position: relative;
+    height: 400px;
+    width: 28%;
+    .modal-content {
+      position: absolute;
+      text-align: center;
+      top: 36%;
+      left: 26%;
+    }
+    .close {
+      color: black;
+      float: right;
+      &:hover {
+        color: cyan;
+        cursor: pointer;
+      }
     }
   }
 }

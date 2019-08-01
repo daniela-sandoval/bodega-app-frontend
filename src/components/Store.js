@@ -13,7 +13,6 @@ class Store extends Component {
       <div className="store-wrapper">
       <Shelf makeCartItem={this.props.makeCartItem} className="left" position="Left" categories={leftCategories}/>
       <Shelf makeCartItem={this.props.makeCartItem} className="right" position="Right" categories={rightCategories}/>
-      <div className="container"></div>
       </div>
     );
   }

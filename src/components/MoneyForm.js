@@ -22,13 +22,15 @@ class MoneyForm extends Component {
   render() {
     return (
       <div className="modal">
-        <div className="modal-content">
+        <div className="modal-pic">
           <span className="close" onClick={this.handleClick}>&times;</span>
-          <p>New Total: ${this.state.newAmount}0</p>
-          <form>
-            <label htmlFor="amount">Amount: </label>
-            <input id="amount" type="number" onChange={this.handleChange} value={this.state.amount}/>
-          </form>
+          <div className="modal-content">
+            <p>New Total: ${this.state.newAmount}</p>
+            <form>
+              <label htmlFor="amount">Amount: </label>
+              <input id="amount" type="number" onChange={this.handleChange} value={this.state.amount}/>
+            </form>
+          </div>
         </div>
       </div>
     )
