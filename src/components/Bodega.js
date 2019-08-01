@@ -23,7 +23,8 @@ class Bodega extends Component {
     .then(resp => resp.json())
     .then(data => {console.log(data)
       this.setState({
-        currentUserInfo: data
+        currentUserInfo: data,
+        currentCart: data.carts[data.carts.length - 1]
       })
     })
     fetch("http://localhost:3000/api/v1/categories")
@@ -47,28 +48,20 @@ class Bodega extends Component {
         item_id: itemId
       })
     })
-    // .then(
-    //   fetch("http://localhost:3000/api/v1/profile", {
-    //     headers: {
-    //       "Authorization": localStorage.token
-    //     }
-    //   })
-    //   .then(resp => resp.json())
-    //   .then(data => {
-    //     this.setState({
-    //       currentUserInfo: data
-    //     })
-    //   })
-    // )
-    // .then(res => res.json())
-    // .then(data => {
-    //   const currentCart = this.getCurrentCart(currentCartId)
-    //   const currentCartItems = currentCart.items
-    //   const updatedCartItems = [...currentCartItems, data.item]
-    //
-    //   const updatedUser = {
-    //     ...this.state.currentUserInfo,
-    //   }
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      console.log(this.state.currentCart)
+      const newItem = {id: data.id, cart_id: data.cart.id, item_id: data.item.id}
+      console.log(newItem)
+      const updatedCurrentCart = this.state.currentCart
+      updatedCurrentCart.cart_items.push(newItem)
+      this.setState({
+        currentCart: updatedCurrentCart
+        })
+      // debugger
+      })
+
   }
 
   getCurrentCart = (id) => {
@@ -83,13 +76,21 @@ class Bodega extends Component {
       <Switch>
         <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
 
-        <Route path='/bodega/cart' render={(routerProps) => <Cart router={routerProps} userData={this.state.currentUserInfo} />}/>
+        <Route path='/bodega/cart' render={(routerProps) => <Cart router={routerProps} cartItems={this.state.currentCart} />}/>
 
-        <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem}router={routerProps} items={this.state.items} categories={this.state.categories}/>} />
+        <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem} router={routerProps} currentCart={this.state.currentCart} categories={this.state.categories}/>} />
       </Switch>
       </div>
     )
   }
 }
+
+// const currentCart = this.getCurrentCart(currentCartId)
+// const currentCartItems = currentCart.items
+// const updatedCartItems = [...currentCartItems, data.item]
+//
+// const updatedUser = {
+//   ...this.state.currentUserInfo
+// }
 
 export default Auth(Bodega, localStorage)

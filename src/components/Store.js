@@ -12,7 +12,7 @@ class Store extends Component {
     return (
       <div className="store-wrapper">
       <h1>La Bodega</h1>
-      <Shelf makeCartItem={this.props.makeCartItem} className="left" position="Left" categories={leftCategories}/>
+      <Shelf makeCartItem={this.props.makeCartItem} className="left" position="Left" categories={leftCategories} />
       <Shelf makeCartItem={this.props.makeCartItem} className="right" position="Right" categories={rightCategories}/>
       <div className="container"></div>
       </div>
