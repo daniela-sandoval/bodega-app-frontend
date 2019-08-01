@@ -80,7 +80,7 @@ class Bodega extends Component {
 
   payCart = (cart) => {
     // console.log(cart)
-    debugger
+    // debugger
     fetch(`http://localhost:3000/api/v1/carts`, {
       method: 'POST',
       headers: {
