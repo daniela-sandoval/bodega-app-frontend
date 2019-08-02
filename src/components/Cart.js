@@ -5,11 +5,6 @@ import '../Stylesheets/Cart.scss'
 
 export default class Cart extends Component {
 
-  // state = {
-    // currentMoney: null,
-  //   canPay: false
-  // }
-
   checkMoney = () => {
     if(this.props.wallet >= this.props.currentTotal) {
       return (
@@ -54,10 +49,3 @@ export default class Cart extends Component {
   }
 
 }
-
-// <div>
-//   <h1>Current items</h1>
-//   <Card.Group>
-//     {this.makeItems()}
-//   </Card.Group>
-// </div>

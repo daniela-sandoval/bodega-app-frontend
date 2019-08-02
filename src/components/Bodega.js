@@ -120,12 +120,4 @@ class Bodega extends Component {
   }
 }
 
-// const currentCart = this.getCurrentCart(currentCartId)
-// const currentCartItems = currentCart.items
-// const updatedCartItems = [...currentCartItems, data.item]
-//
-// const updatedUser = {
-//   ...this.state.currentUserInfo
-// }
-
 export default Auth(Bodega, localStorage)
