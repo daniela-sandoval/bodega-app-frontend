@@ -14,15 +14,17 @@ export default class Profile extends Component {
   }
 
   render () {
-    if(this.props.userData.id) {
+    console.log(this.props)
+    if(this.props.userData && this.props.userData.id) {
       return (
-        <div>
+        <div className="profile-container">
           <h1>Name: {this.props.userData.username}</h1>
-          <p>Last Cart Total: {this.props.userData.carts.length === 1 ? "This is your first cart!" : this.props.userData.carts[this.props.userData.carts.length - 2].total_price }</p>
-          <p>Current Cart Total: ${this.props.userData.carts[this.props.userData.carts.length - 1].total_price}</p>
-          <p>Wallet: ${this.props.userData.wallet}</p>
-          <button onClick={this.toggleForm}>ADD MONEY</button>
-          {this.state.moneyForm ? <MoneyForm currentMoney={this.props.userData.wallet} toggleForm={this.toggleForm}/> : null}
+          <div className="profile-card">
+          <p>Current Cart Total: <br></br> ${this.props.currentTotal}</p>
+          <p>Wallet: <br></br> ${this.props.wallet}</p>
+          <button className="btns" onClick={this.toggleForm}>ADD MONEY</button>
+          {this.state.moneyForm ? <MoneyForm currentMoney={this.props.wallet} toggleForm={this.toggleForm} updateWallet={this.props.updateWallet}/> : null}
+          </div>
         </div>
       )
     } else {

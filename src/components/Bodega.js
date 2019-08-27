@@ -9,9 +9,9 @@ import Auth from './Auth'
 class Bodega extends Component {
   state = {
     categories: [],
-    currentUserInfo: [],
+    currentUserInfo: null,
     wallet: 0,
-    currentCart: [],
+    currentCart: null,
     currentTotal: 0
   }
 
@@ -24,10 +24,10 @@ class Bodega extends Component {
     .then(resp => resp.json())
     .then(data => {
       this.setState({
-        currentUserInfo: data,
-        wallet: data.wallet,
-        currentCart: data.carts[data.carts.length - 1].cart_items,
-        currentTotal: data.carts[data.carts.length - 1].total_price
+        currentUserInfo: data.user,
+        wallet: data.user.wallet,
+        currentCart: data.current_cart,
+        currentTotal: data.current_cart.total_price
       })
     })
     fetch("http://localhost:3000/api/v1/categories")
@@ -38,7 +38,6 @@ class Bodega extends Component {
   }
 
   makeCartItem = (item) => {
-    let currentCartId = this.state.currentUserInfo.carts[this.state.currentUserInfo.carts.length - 1].id
     fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
       headers: {
@@ -47,7 +46,7 @@ class Bodega extends Component {
         "Authorization": localStorage.token
       },
       body: JSON.stringify({
-        cart_id: currentCartId,
+        cart_id: this.state.currentCart.id,
         item_id: item.id,
         name: item.name,
         price: item.price,
@@ -56,67 +55,91 @@ class Bodega extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      const newItem = {id: data.id, name: data.item.name, img_url: data.item.img_url,  price: data.item.price, cart_id: data.cart.id, item_id: data.item.id}
+      debugger
       this.setState({
-        currentCart: [...this.state.currentCart, newItem],
-        currentTotal: this.state.currentTotal + newItem.price
+        currentCart: data.cart,
+        currentTotal: data.cart.total_price
         })
       })
   }
 
   deleteCartItem = (clickedItem) => {
-    let cart = this.state.currentCart
-    let newCartItems = cart.filter(item => !(item.id === clickedItem.id))
-    this.setState({ currentCart: newCartItems })
+    console.log(clickedItem)
+    let cartItems = this.state.currentCart.items
+    let newCartItems = cartItems.filter(item => !(item.id === clickedItem.id))
+    console.log(newCartItems)
     fetch(`http://localhost:3000/api/v1/cart_items/${clickedItem.id}`, {
       method: "DELETE"
     })
-    .then(() => {
+    .then(res => res.json())
+    .then(cart => {
       this.setState({
-        currentTotal: this.state.currentTotal - clickedItem.price
+        currentTotal: cart.total_price,
+        currentCart: cart
         })
       })
   }
-
-  payCart = (cart) => {
-    // console.log(cart)
-    // debugger
-    fetch(`http://localhost:3000/api/v1/carts`, {
-      method: 'POST',
+  //
+  // payCart = () => {
+  //   let updatedWallet = this.state.wallet - this.state.currentTotal
+  //   fetch(`http://localhost:3000/api/v1/carts`, {
+  //     method: 'POST',
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json",
+  //       "Authorization": localStorage.token
+  //     },
+  //     body: JSON.stringify({wallet: updatedWallet})
+  //     })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(this.state)
+  //       debugger
+  //       this.setState({
+  //         currentUserInfo: data,
+  //         wallet: data.wallet,
+  //         currentCart: [],
+  //         currentTotal: 0
+  //       })
+  //       })
+  // }
+  //
+  updateWallet = (amount) => {
+    let newAmount = this.state.wallet + amount
+    let userId = this.state.currentUserInfo.id
+    fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+      method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": localStorage.token
       },
       body: JSON.stringify({
-        user_id: this.state.currentUserInfo.id
-      })
+        wallet: newAmount
+        })
       })
       .then(res => res.json())
       .then(data => {
-        this.setState({
-          currentCart: [],
-          wallet: this.state.wallet - cart.currentTotal,
-          currentTotal: 0
-          })
+        this.setState({wallet: data.user.wallet})
         })
   }
 
   render() {
-    // console.log(this.state)
+    console.log(this.state)
+    if (this.state.currentCart) {
+      return (
+        <div>
+        <Navbar />
+        <Switch>
+          <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} wallet={this.state.wallet} currentTotal={this.state.currentTotal} updateWallet={this.updateWallet}/>} />
 
-    return (
-      <div>
-      <Navbar />
-      <Switch>
-        <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} />} />
+          <Route path='/bodega/cart' render={(routerProps) => <Cart deleteCartItem={this.deleteCartItem} payCart={this.payCart} router={routerProps} cartItems={this.state.currentCart.items} currentTotal={this.state.currentTotal} wallet={this.state.wallet}/>}/>
 
-        <Route path='/bodega/cart' render={(routerProps) => <Cart deleteCartItem={this.deleteCartItem} payCart={this.payCart} router={routerProps} cartItems={this.state.currentCart} currentTotal={this.state.currentTotal} wallet={this.state.wallet}/>}/>
-
-        <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem} router={routerProps} currentCart={this.state.currentCart} categories={this.state.categories}/>} />
-      </Switch>
-      </div>
-    )
+          <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem} router={routerProps} currentCart={this.state.currentCart} categories={this.state.categories}/>} />
+        </Switch>
+        </div>
+      )
+    } else {return null}
   }
 }
 

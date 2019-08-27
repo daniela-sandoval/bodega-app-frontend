@@ -1,5 +1,28 @@
 .cart {
-  margin-bottom: 30vw;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .current-items {
+    padding: 20px 0px;
+    margin-left: 5%;
+    width: 90%;
+  }
+
+  .current-total {
+    position: fixed;
+    z-index: 1;
+    padding: 20px 0px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: red;
+    color: white;
+    width: 100%;
+  }
+
   h1 {
     font-family: "Staatliches";
   }

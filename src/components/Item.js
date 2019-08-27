@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react';
 import '../Stylesheets/Item.scss';
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
 
 
 class Item extends Component {
+
+  state = {
+    show: false,
+    clickedItem: null
+  }
+
   handleClick = () => {
     this.props.makeCartItem(this.props)
+    this.setState({show: true})
   }
-  debugger
+
   render() {
     return (
       <Card className="item-card">
@@ -31,6 +40,15 @@ class Item extends Component {
             $ {this.props.price}
           </span>
         </Card.Content>
+
+        <SweetAlert
+        show={this.state.show}
+        title="Added to Cart"
+        text=""
+        onConfirm={() => this.setState({ show: false })}
+        onOutsideClick={() => this.setState({ show: false })}
+        />
+
       </Card>
     );
   }
