@@ -1,27 +1,28 @@
-# Module 4: 🏬 La Bodega API 🏬
+# Module 4: 🏬 La Bodega 🏬
 
-La Bodega is an app that emulated the experience of shopping at your neighborhood bodega/ corner store deli. La Bodega talks to it's backend La Bodega API which contains seeded instances of produce and the ability to manipulate a customer's cart found in the controllers. 
+La Bodega is an app that emulated the experience of shopping at your neighborhood bodega/ corner store deli. La Bodega allows customer's to enter the shop and select produce from two shelves. Each shelves contain a variety of different categories and items to choose from. Customer's can then select which items they want and pay for items (if they have enough money in their e-wallet)! 
 
-This is a Ruby on Rails API created using ActiveRecord.
+This is a JavaScript application that implements React.
 
-## How to Install La Bodega API
-1. Use your terminal to navigate into the place where you want to clone La Bodega API's directory and `git clone` the url.
-2. In terminal run `bundle install` in order to install the necessary gems needed to run the backend.
-3. Run command `rails db:migrate && rails db:seed` in order to set up the tables and the necessary seeded files.
-4. Finally, run `rails s` and copy the url in your terminal (more than likely localhost:3000) and open up your browser using the url in order to having a running server that La bodega can make requests to.
+## How to Install La Bodega
+1. Use your terminal to navigate into the place where you want to clone La Bodega's directory and `git clone` the url.
+2. In terminal run `npm install` in order to install the necessary packages found in the `package.json` file to run this frontend.
+3. Make sure you run `rails s` for the backend server needed for this app( La Bodega API: https://github.com/tessneau/bodega-app-backend ), and then run `npm start`.
+4. This should open up your browser to La Bodega's welcome page!
 
-## How to Use La Bodega API
-La Bodega API is needed in order to accept HTTP requests from it's frontend La Bodega. This allows users to:
-* Create, read, and update their accounts with the help of JavaScript Web Tokens and Bcrypt.
-* Manipulate a user's cart by adding, deleting, and updating cart item instances.
-* Have access to seeded produce and their categories. 
+## How to Use La Bodega
+La Bodega makes requests to it's backend and allows its customers to:
+* Create, read, and update their accounts with the help of JavaScript Web Token,Local Storage, and Bcrypt.
+* Add and delete items from their cart which persists upon a user's rentry into the site.
+* Customer's are given 10 dollars for the grand opening of La Bodega and can add money to their e-wallet should they not have enough money to pay for items.
+* Are given access to a variety of different categories and produce that are commonly found in your local bodega. 
 
 ## Developers
 * Tess Neau
 * Daniela Sandoval
 
 ## More About Our App
-La Bodega API requires ActiveRecord and gems such as CORS, JWT, and Bcrypt.
+La Bodega requires packages such as React, Sass, and Semantics UI React.
 
 ### License
 This project is licensed under the Learn.co Educational Content License. Please read `LICENSE.md` location in the directory or click on the following link (http://learn.co/content-license) for further details.
