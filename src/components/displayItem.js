@@ -5,12 +5,10 @@ import '../Stylesheets/DisplayItem.scss'
 
 class DisplayItem extends Component {
   handleClick = () => {
-    console.log(this.props)
-    // this.props.deleteCartItem(this.props)
+    this.props.deleteCartItem(this.props)
   }
 
   render() {
-    // console.log(this.props)
     return (
       <Card className="dis-item">
         <Image src={this.props.img_url} alt="food item" wrapped ui={false} className="food-pic"/>

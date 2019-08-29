@@ -1,19 +1,31 @@
 .cart {
-  height: inherit;
+  height: 100vh;
+  // height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   .current-items {
-    padding: 20px 0px;
+    text-align: center;
+    padding: 60px 0px;
     margin-left: 5%;
     width: 90%;
+    height: 70vh;
+  }
+
+  .ui.cards {
+    padding-bottom: 15%;
+  }
+
+  .empty-cart {
+    padding: 60px 0px;
+    align-self: center;
   }
 
   .current-total {
+    padding: 20px 0px;
     position: fixed;
     z-index: 1;
-    padding: 20px 0px;
     bottom: 0;
     display: flex;
     flex-direction: column;

@@ -8,8 +8,7 @@ import 'sweetalert/dist/sweetalert.css';
 class Item extends Component {
 
   state = {
-    show: false,
-    clickedItem: null
+    show: false
   }
 
   handleClick = () => {
