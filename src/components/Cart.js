@@ -26,7 +26,6 @@ export default class Cart extends Component {
   }
 
   generateItems = () => {
-    console.log(this.props)
     return this.props.cartItems.map((item, i) => {
     return <DisplayItem deleteCartItem={this.props.deleteCartItem} key={i} {...item} />
     })

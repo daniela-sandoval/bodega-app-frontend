@@ -55,7 +55,6 @@ class Bodega extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      debugger
       this.setState({
         currentCart: data.cart,
         currentTotal: data.cart.total_price
@@ -64,10 +63,8 @@ class Bodega extends Component {
   }
 
   deleteCartItem = (clickedItem) => {
-    console.log(clickedItem)
     let cartItems = this.state.currentCart.items
     let newCartItems = cartItems.filter(item => !(item.id === clickedItem.id))
-    console.log(newCartItems)
     fetch(`http://localhost:3000/api/v1/cart_items/${clickedItem.id}`, {
       method: "DELETE"
     })
