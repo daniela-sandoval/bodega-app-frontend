@@ -5,17 +5,13 @@ import '../Stylesheets/Cart.scss'
 
 export default class Cart extends Component {
 
-  // state = {
-    // currentMoney: null,
-  //   canPay: false
-  // }
 
   checkMoney = () => {
     if(this.props.wallet >= this.props.currentTotal) {
       return (
         <div>
         <br/>
-        <button className="btns" onClick={this.handleClick}>Pay Now?</button>
+        {this.props.cartItems[0] ? <button className="btns" onClick={this.handleClick}>Pay Now?</button> : null}
         </div>
         )} else {
       return (
@@ -26,38 +22,39 @@ export default class Cart extends Component {
   }
 
   handleClick = (e) => {
-    // console.log(e)
-    this.props.payCart(this.props)
+    this.props.payCart()
   }
 
   generateItems = () => {
+    console.log(this.props)
     return this.props.cartItems.map((item, i) => {
     return <DisplayItem deleteCartItem={this.props.deleteCartItem} key={i} {...item} />
     })
   }
 
   render () {
-    if(this.props.cartItems[0]) {
+    if(this.props.cartItems) {
       return (
         <div className="cart">
+          <div className="current-items">
           <h1>Current items:</h1>
           <Card.Group className="display-con">
             {this.generateItems()}
           </Card.Group>
+          </div>
+          <div className="current-total">
           <h1>Current Total: ${this.props.currentTotal}</h1>
           {this.checkMoney()}
+          </div>
         </div>
       )
     } else {
-      return null
+      return (
+      <div className="empty-cart">
+      <h1>Your cart is empty</h1>
+      </div>
+      )
     }
   }
 
 }
-
-// <div>
-//   <h1>Current items</h1>
-//   <Card.Group>
-//     {this.makeItems()}
-//   </Card.Group>
-// </div>

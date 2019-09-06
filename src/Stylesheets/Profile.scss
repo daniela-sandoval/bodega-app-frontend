@@ -1,0 +1,31 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Staatliches', cursive;
+  font-size: 20px;
+
+
+  h1 {
+    margin: 50px 0px;
+    font-family: 'Staatliches', cursive;
+    font-size: 50px;
+
+  }
+
+  .profile-card {
+    padding: 50px 50px;
+    border: 1px solid black;
+    display: flex;
+    flex-flow: column wrap;
+    .last-cart {
+      color: grey;
+    }
+  }
+
+  button {
+    margin: 40px 0px 0px 0px;
+    padding: 5px 40px;
+  }
+
+}

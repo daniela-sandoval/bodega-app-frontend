@@ -35,19 +35,27 @@ export default class Register extends Component {
     })
   }
 
+  handleClick = () => {
+    this.props.history.push("/")
+  }
+
   render() {
     return (
       <div className="register">
         <h1>LA BODEGA</h1>
-        <h4>REGISTER PLS</h4>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="register-form">
+        <h4>REGISTER</h4>
+        <div className="user-in">
           <label htmlFor="username">Username: </label>
           <input className="user-input" id="username" type="text" name="username" onChange={this.handleChange} value={this.state.username} /><br/>
-
+        </div>
+        <div className="user-pass">
           <label htmlFor="pass">Password: </label>
           <input className="user-input" id="pass" type="password" name="password" onChange={this.handleChange} value={this.state.password} /><br/>
+          </div>
           <input className="btns" type="submit" />
         </form>
+        <button className="btns" onClick={this.handleClick}>Returning User?</button>
       </div>
     )
   }

@@ -1,12 +1,27 @@
 .register {
   text-align: center;
   zoom: 1.7;
+  position: relative;
+  top: 20%;
   h1 {
     font-family: 'Staatliches', cursive;
-    font-size: 50px;
+    font-size: 60px;
     color: red;
     text-shadow: 2px 2px #16d6f7;
   }
+
+  .register-form{
+    font-family: 'Staatliches', cursive;
+    margin: 20px;
+    h4 {
+      font-family: 'Staatliches', cursive;
+      font-size: 20px;
+    }
+    .user-in, .user-pass {
+      margin: 10px;
+    }
+  }
+
   .user-input {
     border: 0;
     border: 1px solid #16d6f7;

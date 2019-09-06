@@ -9,14 +9,22 @@ class MoneyForm extends Component {
   }
 
   handleClick = () => {
-    this.props.toggleForm();
+    this.props.toggleForm()
   };
 
   handleChange = (event) => {
+    if (event.target.value > 0) {
     this.setState({
       amount: parseInt(event.target.value),
       newAmount: parseInt(this.props.currentMoney) + parseInt(event.target.value)
     })
+
+  }}
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.updateWallet(this.state.amount)
+    this.props.toggleForm()
   }
 
   render() {
@@ -26,9 +34,11 @@ class MoneyForm extends Component {
           <span className="close" onClick={this.handleClick}>&times;</span>
           <div className="modal-content">
             <p>New Total: ${this.state.newAmount}</p>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <label htmlFor="amount">Amount: </label>
               <input id="amount" type="number" onChange={this.handleChange} value={this.state.amount}/>
+              <br></br>
+              <button className="btns" type="submit" value="Submit">submit</button>
             </form>
           </div>
         </div>

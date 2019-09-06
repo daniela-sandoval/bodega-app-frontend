@@ -5,7 +5,8 @@ import '../Stylesheets/DisplayItem.scss'
 
 class DisplayItem extends Component {
   handleClick = () => {
-    this.props.deleteCartItem(this.props)
+    console.log(this.props)
+    // this.props.deleteCartItem(this.props)
   }
 
   render() {

@@ -34,7 +34,7 @@ class Shelf extends Component {
       return (
         <div className="Filter">
           <label className="shelf-name">
-          {this.props.position} Shelf Category:
+          {this.props.position === "Left" ? 'THE PANTRY' : 'THE FRIDGE'}
           <Select options={this.generateOptions()} onChange={this.handleChange} className="select-bar"/>
           </label>
           <h3>{this.state.category.name}</h3>
