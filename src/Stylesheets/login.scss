@@ -1,32 +1,92 @@
-.login {
-  text-align: center;
-  zoom: 1.7;
-  position: relative;
-  top: 10%;
-  h1 {
-    font-family: 'Staatliches', cursive;
-    font-size: 60px;
-    color: red;
-    text-shadow: 2px 2px #16d6f7;
+.landing-page {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 15%;
+  align-items: center;
+  width: 100vw;
+  .store {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .store-pic {
+      zoom: 0.5;
+      animation: float 2s ease-in-out infinite;
+    }
+    .shadow {
+      width: 60%;
+      height: 10px;
+      padding: 10px;
+      background-color: black;
+      opacity: 0.1;
+      border-radius: 100%;
+      animation: shadow_float 2s ease-in-out infinite;
+    }
   }
-  .login-form{
-    font-family: 'Staatliches', cursive;
-    margin: 20px;
-    h4 {
+  .login {
+    text-align: center;
+    zoom: 1.7;
+    position: relative;
+    top: 10%;
+    background-color: #424242;
+    padding: 3%;
+    border-radius: 5%;
+    box-shadow: 1px 1px 5px black;
+    border: 1px solid black;
+    h1 {
       font-family: 'Staatliches', cursive;
-      font-size: 20px;
+      font-size: 60px;
+      color: red;
+      text-shadow: 2px 2px #16d6f7;
+      background-color: #ffdb58;
+      border-radius: 60%;
     }
-    .user-in, .user-pass {
+    .login-form{
+      font-family: 'Staatliches', cursive;
       margin: 10px;
+      background: #b2ebf2;
+      padding: 15px;
+      border: 1.5px solid;
+      h4 {
+        font-family: 'Staatliches', cursive;
+        font-size: 20px;
+      }
+      .user-in, .user-pass {
+        margin: 10px;
+      }
+    }
+    .user-input {
+      border: 0;
+      border: 1px solid #424242;
+      border-radius: 5px;
+      &:focus {
+        outline: none;
+      }
     }
   }
-  .user-input {
-    border: 0;
-    border: 1px solid #16d6f7;
-    border-radius: 5px;
-    &:focus {
-      outline: none;
-    }
-  }
+}
 
+@keyframes float {
+  0% {
+    transform: translatey(35px);
+  }
+  50% {
+    transform: translatey(-30px)
+  }
+  100% {
+    transform: translatey(35px)
+  }
+}
+
+@keyframes shadow_float {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }

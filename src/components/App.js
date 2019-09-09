@@ -9,13 +9,12 @@ export default class App extends Component{
 
   render() {
     return (
-      <Switch>
-        <Route path='/register' component={Register} />
-        <Route path='/bodega' component={Bodega}/>
-        <Route exact path='/' component={Login} />
-      </Switch>
+        <Switch>
+          <Route path='/register' component={Register} />
+          <Route path='/bodega' component={Bodega}/>
+          <Route exact path='/' component={Login} />
+        </Switch>
     )
   }
 
 }
-// <Route path='/bodega' component={Auth(Bodega, localStorage)}/>

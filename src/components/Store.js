@@ -11,8 +11,8 @@ class Store extends Component {
 
     return (
       <div className="store-wrapper">
-      <Shelf makeCartItem={this.props.makeCartItem} className="left" position="Left" categories={leftCategories}/>
-      <Shelf makeCartItem={this.props.makeCartItem} className="right" position="Right" categories={rightCategories}/>
+        <Shelf makeCartItem={this.props.makeCartItem} className="left" position="Left" categories={leftCategories}/>
+        <Shelf makeCartItem={this.props.makeCartItem} className="right" position="Right" categories={rightCategories}/>
       </div>
     );
   }
@@ -20,3 +20,9 @@ class Store extends Component {
 }
 
 export default Auth(Store, localStorage)
+
+
+// <div className="glassdoors">
+//   <div className="door1"></div>
+//   <div className="door2"></div>
+// </div>

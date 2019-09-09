@@ -1,9 +1,25 @@
 .Filter {
   max-width: 70%;
+  text-align: center;
+  z-index: 0;
+  padding: 20px;
   .shelf-name {
     font-size: 25px;
   }
   .select-bar {
     width: 500px;
+  }
+  .reset-btn {
+    font-family: 'Staatliches', cursive;
+    background-color: #27a527;
+    border-radius: 6px;
+    transition: 0.4s;
+    border: 3px solid 'red';
+    margin: 8px;
+    &:hover {
+      background-color: red;
+      color: white;
+      cursor: pointer;
+    }
   }
 }
