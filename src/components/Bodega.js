@@ -37,6 +37,23 @@ class Bodega extends Component {
     })
   }
 
+  fetchCart = () => {
+    fetch("http://localhost:3000/api/v1/profile", {
+      headers: {
+        "Authorization": localStorage.token
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState({
+        currentUserInfo: data.user,
+        wallet: data.user.wallet,
+        currentCart: data.current_cart,
+        currentTotal: data.current_cart.total_price
+      })
+    })
+  }
+
   makeCartItem = (item) => {
     fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
@@ -63,8 +80,8 @@ class Bodega extends Component {
   }
 
   deleteCartItem = (clickedItem) => {
-    let cartItems = this.state.currentCart.items
-    let newCartItems = cartItems.filter(item => !(item.id === clickedItem.id))
+    // let cartItems = this.state.currentCart.items
+    // let newCartItems = cartItems.filter(item => !(item.id === clickedItem.id))
     fetch(`http://localhost:3000/api/v1/cart_items/${clickedItem.id}`, {
       method: "DELETE"
     })
@@ -76,31 +93,32 @@ class Bodega extends Component {
         })
       })
   }
-  //
-  // payCart = () => {
-  //   let updatedWallet = this.state.wallet - this.state.currentTotal
-  //   fetch(`http://localhost:3000/api/v1/carts`, {
-  //     method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //       "Authorization": localStorage.token
-  //     },
-  //     body: JSON.stringify({wallet: updatedWallet})
-  //     })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log(this.state)
-  //       debugger
-  //       this.setState({
-  //         currentUserInfo: data,
-  //         wallet: data.wallet,
-  //         currentCart: [],
-  //         currentTotal: 0
-  //       })
-  //       })
-  // }
-  //
+
+  payCart = () => {
+    let updatedWallet = this.state.wallet - this.state.currentTotal
+    debugger
+    fetch(`http://localhost:3000/api/v1/carts`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": localStorage.token
+      },
+      body: JSON.stringify({wallet: updatedWallet, id: this.state.currentUserInfo.id})
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(this.state)
+        debugger
+        this.setState({
+          currentUserInfo: data,
+          wallet: data.wallet,
+          currentCart: {},
+          currentTotal: 0
+        })
+        })
+  }
+
   updateWallet = (amount) => {
     let newAmount = this.state.wallet + amount
     let userId = this.state.currentUserInfo.id
@@ -130,9 +148,9 @@ class Bodega extends Component {
         <Switch>
           <Route path='/bodega/profile' render={(routerProps) => <Profile router={routerProps} userData={this.state.currentUserInfo} wallet={this.state.wallet} currentTotal={this.state.currentTotal} updateWallet={this.updateWallet}/>} />
 
-          <Route path='/bodega/cart' render={(routerProps) => <Cart deleteCartItem={this.deleteCartItem} payCart={this.payCart} router={routerProps} cartItems={this.state.currentCart.items} currentTotal={this.state.currentTotal} wallet={this.state.wallet}/>}/>
+          <Route path='/bodega/cart' render={(routerProps) => <Cart deleteCartItem={this.deleteCartItem} payCart={this.payCart} router={routerProps} cartItems={this.state.currentCart.items} currentTotal={this.state.currentTotal} wallet={this.state.wallet} fetchCart = {this.fetchCart}/>}/>
 
-          <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem} router={routerProps} currentCart={this.state.currentCart} categories={this.state.categories}/>} />
+          <Route path='/bodega' render={(routerProps) => <Store makeCartItem={this.makeCartItem} router={routerProps} categories={this.state.categories}/>} />
         </Switch>
         </div>
       )
